@@ -1,0 +1,6 @@
+CREATE TABLE perfis (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(120) NOT NULL,
+    cargo VARCHAR(120) NOT NULL,
+    resumo TEXT NOT NULL
+);

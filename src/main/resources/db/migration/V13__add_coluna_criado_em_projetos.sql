@@ -1,0 +1,2 @@
+ALTER TABLE projetos
+    ADD COLUMN criado_em TIMESTAMP NOT NULL DEFAULT NOW();

@@ -1,0 +1,291 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #17202a;
+  background: #f6f3ee;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+a {
+  color: inherit;
+}
+
+@keyframes sobre-grid-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(42px, 42px, 0);
+  }
+}
+
+@keyframes sobre-scan {
+  0% {
+    transform: translateY(-22%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.18;
+  }
+  80% {
+    opacity: 0.18;
+  }
+  100% {
+    transform: translateY(122%);
+    opacity: 0;
+  }
+}
+
+@keyframes sobre-particula-flutuar {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+    opacity: 0.6;
+  }
+}
+
+@keyframes public-route-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes indicador-scroll-pulso {
+  0%,
+  100% {
+    opacity: 0.78;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(3px);
+  }
+}
+
+@layer components {
+  .public-shell {
+    background:
+      radial-gradient(circle at 14% 8%, rgba(190, 132, 67, 0.18), transparent 26rem),
+      radial-gradient(circle at 86% 4%, rgba(36, 138, 102, 0.18), transparent 28rem),
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(135deg, #08110f 0%, #101a18 48%, #070b0c 100%);
+    background-size: auto, auto, 42px 42px, 42px 42px, auto;
+  }
+
+  .public-card {
+    @apply rounded-md border border-white/10 bg-[#101817]/85 shadow-[0_24px_80px_rgba(0,0,0,0.32)] backdrop-blur;
+  }
+
+  .public-divider {
+    @apply flex items-center gap-3 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-emerald-300;
+  }
+
+  .public-divider::before,
+  .public-divider::after {
+    content: "";
+    @apply h-px flex-1 bg-emerald-300/25;
+  }
+
+  .public-kicker {
+    @apply text-xs font-bold uppercase tracking-[0.24em] text-amber-300;
+  }
+
+  .public-chip {
+    @apply inline-flex items-center rounded-md border border-white/10 bg-white/[0.06] px-3 py-1.5 text-xs font-bold text-white/70;
+  }
+
+  .public-route-transition {
+    animation: public-route-fade 240ms ease-out;
+  }
+
+  .public-interactive {
+    @apply transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_80px_rgba(0,0,0,0.38)];
+  }
+
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 520ms ease, transform 520ms ease;
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: transform, opacity;
+  }
+
+  .reveal-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .botao-primario {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-cobre px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#954923] disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .botao-secundario {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-tinta/15 bg-white px-4 py-2 text-sm font-semibold text-tinta transition hover:bg-tinta/5 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .campo {
+    @apply w-full rounded-md border border-tinta/15 bg-white px-3 py-2 text-sm text-tinta outline-none transition focus:border-cobre focus:ring-2 focus:ring-cobre/20;
+  }
+
+  .label {
+    @apply text-sm font-semibold text-tinta;
+  }
+
+  .erro-campo {
+    @apply mt-1 text-sm text-red-700;
+  }
+
+  .card {
+    @apply rounded-md border border-tinta/10 bg-white shadow-sm;
+  }
+
+  .admin-shell .card {
+    @apply border-white/10 bg-[#101817]/85 text-white shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur;
+  }
+
+  .admin-shell .campo {
+    @apply border-white/10 bg-white/[0.07] text-white placeholder:text-white/30 focus:border-amber-300 focus:ring-amber-300/20;
+  }
+
+  .admin-shell .label {
+    @apply text-white/80;
+  }
+
+  .admin-shell .botao-primario {
+    @apply bg-amber-300 text-[#11130f] hover:bg-amber-200;
+  }
+
+  .admin-shell .botao-secundario {
+    @apply border-white/10 bg-white/[0.07] text-white hover:bg-white/[0.11];
+  }
+
+  .admin-shell .text-tinta {
+    color: rgba(255, 255, 255, 0.94) !important;
+  }
+
+  .admin-shell [class*="text-tinta/"] {
+    color: rgba(255, 255, 255, 0.62) !important;
+  }
+
+  .admin-shell [class*="bg-tinta/"] {
+    background-color: rgba(255, 255, 255, 0.07) !important;
+  }
+
+  .sobre-fundo-animado {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .sobre-fundo-animado::before {
+    content: "";
+    position: absolute;
+    inset: -42px;
+    background-image:
+      linear-gradient(rgba(120, 255, 214, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120, 255, 214, 0.035) 1px, transparent 1px);
+    background-size: 42px 42px;
+    animation: sobre-grid-drift 24s linear infinite;
+    will-change: transform;
+  }
+
+  .sobre-fundo-animado::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 22%;
+    background: linear-gradient(to bottom, rgba(16, 185, 129, 0), rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0));
+    animation: sobre-scan 13s ease-in-out infinite;
+  }
+
+  .sobre-fundo-particula {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(252, 211, 77, 0.85);
+    box-shadow: 0 0 12px rgba(252, 211, 77, 0.35);
+    animation: sobre-particula-flutuar 6s ease-in-out infinite;
+  }
+
+  .public-scroll-indicador {
+    @apply fixed bottom-6 left-1/2 z-30 -translate-x-1/2 border border-amber-300/35 bg-[#0f1816]/85 p-2 text-amber-200 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur transition hover:border-amber-200/60 hover:text-amber-100;
+  }
+
+  .public-scroll-indicador-icone {
+    animation: indicador-scroll-pulso 1.2s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sobre-fundo-animado::before,
+    .sobre-fundo-animado::after,
+    .sobre-fundo-particula {
+      animation: none !important;
+    }
+
+    .public-route-transition {
+      animation: none !important;
+    }
+
+    .reveal-item {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .public-scroll-indicador-icone {
+      animation: none !important;
+    }
+  }
+
+  .scrollbar-admin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.08);
+  }
+
+  .scrollbar-admin::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .scrollbar-admin::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+  }
+
+  .scrollbar-admin::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, rgba(252, 211, 77, 0.65), rgba(16, 185, 129, 0.65));
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+  }
+
+  .scrollbar-admin::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, rgba(252, 211, 77, 0.8), rgba(16, 185, 129, 0.8));
+  }
+}

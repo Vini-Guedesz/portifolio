@@ -1,0 +1,63 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: portfolio_postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-portifolio}
+      POSTGRES_USER: ${POSTGRES_USER:-portifolio}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-portifolio}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: portfolio_backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SERVER_PORT: 8080
+      DATABASE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-portifolio}
+      DATABASE_USERNAME: ${POSTGRES_USER:-portifolio}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-portifolio}
+      JWT_SECRET: ${JWT_SECRET:-troque-esta-chave-por-uma-chave-segura-com-mais-de-32-caracteres}
+      JWT_EXPIRACAO_MS: ${JWT_EXPIRACAO_MS:-86400000}
+      JWT_REFRESH_EXPIRACAO_MS: ${JWT_REFRESH_EXPIRACAO_MS:-604800000}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:5173}
+      ADMIN_NOME: ${ADMIN_NOME:-Administrador}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@portfolio.com}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+      ADMIN_EXIGIR_TROCA_PRIMEIRO_ACESSO: ${ADMIN_EXIGIR_TROCA_PRIMEIRO_ACESSO:-true}
+      AUTH_LOGIN_MAX_TENTATIVAS: ${AUTH_LOGIN_MAX_TENTATIVAS:-5}
+      AUTH_LOGIN_JANELA_MINUTOS: ${AUTH_LOGIN_JANELA_MINUTOS:-10}
+      AUTH_LOGIN_BLOQUEIO_MINUTOS: ${AUTH_LOGIN_BLOQUEIO_MINUTOS:-15}
+      UPLOAD_DIR: ${UPLOAD_DIR:-uploads}
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+    volumes:
+      - backend_uploads:/app/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:8080}
+    container_name: portfolio_frontend
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_PORT:-5173}:80"
+
+volumes:
+  postgres_data:
+  backend_uploads:

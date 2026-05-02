@@ -1,0 +1,34 @@
+ALTER TABLE usuarios
+    ADD COLUMN criado_em TIMESTAMP NOT NULL DEFAULT NOW(),
+    ADD COLUMN atualizado_em TIMESTAMP NOT NULL DEFAULT NOW(),
+    ADD COLUMN criado_por VARCHAR(160) NOT NULL DEFAULT 'sistema',
+    ADD COLUMN atualizado_por VARCHAR(160) NOT NULL DEFAULT 'sistema';
+
+ALTER TABLE perfis
+    ADD COLUMN criado_em TIMESTAMP NOT NULL DEFAULT NOW(),
+    ADD COLUMN atualizado_em TIMESTAMP NOT NULL DEFAULT NOW(),
+    ADD COLUMN criado_por VARCHAR(160) NOT NULL DEFAULT 'sistema',
+    ADD COLUMN atualizado_por VARCHAR(160) NOT NULL DEFAULT 'sistema';
+
+ALTER TABLE experiencias
+    ADD COLUMN criado_em TIMESTAMP NOT NULL DEFAULT NOW(),
+    ADD COLUMN atualizado_em TIMESTAMP NOT NULL DEFAULT NOW(),
+    ADD COLUMN criado_por VARCHAR(160) NOT NULL DEFAULT 'sistema',
+    ADD COLUMN atualizado_por VARCHAR(160) NOT NULL DEFAULT 'sistema';
+
+ALTER TABLE conquistas
+    ADD COLUMN criado_em TIMESTAMP NOT NULL DEFAULT NOW(),
+    ADD COLUMN atualizado_em TIMESTAMP NOT NULL DEFAULT NOW(),
+    ADD COLUMN criado_por VARCHAR(160) NOT NULL DEFAULT 'sistema',
+    ADD COLUMN atualizado_por VARCHAR(160) NOT NULL DEFAULT 'sistema';
+
+ALTER TABLE certificacoes
+    ADD COLUMN criado_em TIMESTAMP NOT NULL DEFAULT NOW(),
+    ADD COLUMN atualizado_em TIMESTAMP NOT NULL DEFAULT NOW(),
+    ADD COLUMN criado_por VARCHAR(160) NOT NULL DEFAULT 'sistema',
+    ADD COLUMN atualizado_por VARCHAR(160) NOT NULL DEFAULT 'sistema';
+
+ALTER TABLE projetos
+    ADD COLUMN atualizado_em TIMESTAMP NOT NULL DEFAULT NOW(),
+    ADD COLUMN criado_por VARCHAR(160) NOT NULL DEFAULT 'sistema',
+    ADD COLUMN atualizado_por VARCHAR(160) NOT NULL DEFAULT 'sistema';
