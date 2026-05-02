@@ -1,19 +1,29 @@
-# Portifolio Pessoal
+# Portifolio Pessoal (Spring Boot + React)
 
-Aplicacao fullstack para apresentar perfil profissional em area publica e manter conteudo por um painel administrativo.
+Portifolio Pessoal is a fullstack application with a public showcase and a protected admin panel to manage profile, experience, certifications, achievements and projects.
 
-## Status
+## ✨ Features
 
-- Ativo
-- Estrutura pronta para uso em portifolio profissional
+- 🌍 Public area:
+  - `/:usuario/sobre`
+  - `/:usuario/portfolio`
+- 🔐 Admin area:
+  - Secure login with JWT (access + refresh token)
+  - First-access policy configurable by environment variable
+  - CRUD modules for profile and portfolio data
+- 🛡️ Security and reliability:
+  - Login rate limit
+  - Flyway migrations
+  - DTO-based API contracts
+- 🖼️ Profile photo upload and modern dark UI
 
-## Stack
+## 🛠️ Tech Stack
 
 ### Backend
 
 - Java 21
 - Spring Boot
-- Spring Security (JWT)
+- Spring Security
 - PostgreSQL
 - Flyway
 - Maven
@@ -23,94 +33,61 @@ Aplicacao fullstack para apresentar perfil profissional em area publica e manter
 - React
 - TypeScript
 - Vite
-- Tailwind
+- Tailwind CSS
 - Axios
 - React Hook Form + Zod
 
 ### Infra
 
-- Docker e Docker Compose
+- Docker + Docker Compose
 
-## Funcionalidades
-
-- Rotas publicas por `/:usuario/sobre` e `/:usuario/portfolio`
-- Painel admin para CRUD de perfil, experiencias, conquistas, certificacoes e projetos
-- JWT com access token + refresh token
-- Rate limit no login
-- Fluxo de primeiro acesso configuravel por variavel de ambiente
-- Upload de foto de perfil
-- Importacao de projetos do GitHub com selecao de exibicao
-
-## Como executar
-
-### Docker (recomendado)
+## 📦 Installation
 
 ```bash
+# Clone repository
+git clone https://github.com/Vini-Guedesz/portifolio.git
+
+# Enter project folder
+cd portifolio
+
+# Create env file (Windows)
 copy .env.example .env
+
+# Run services
 docker compose up --build
 ```
 
-Acessos:
+Main URLs:
 
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:8080`
 - Swagger: `http://localhost:8080/swagger-ui.html`
 
-## Rotas principais
+## 🧩 Project Structure
 
-### Publico
+```text
+.
+├── src/main/java/com/portifolio/
+│   ├── auth/
+│   ├── perfil/
+│   ├── experiencia/
+│   ├── conquista/
+│   ├── certificacao/
+│   ├── projeto/
+│   ├── seguranca/
+│   └── config/
+├── src/main/resources/db/migration/
+├── frontend/src/
+│   ├── pages/public/
+│   ├── pages/admin/
+│   ├── api/
+│   └── components/
+└── docker-compose.yml
+```
 
-- `/` redireciona para `/:usuario/sobre`
-- `/:usuario/sobre`
-- `/:usuario/portfolio`
+## 📌 Roadmap
 
-### Admin
-
-- `/admin/login`
-- `/admin/dashboard`
-- `/admin/perfil`
-- `/admin/experiencias`
-- `/admin/conquistas`
-- `/admin/certificacoes`
-- `/admin/projetos`
-
-## Primeiro acesso
-
-Credenciais iniciais padrao:
-
-- Email: `admin@portfolio.com`
-- Senha: `admin123`
-
-Controle por `.env`:
-
-- `ADMIN_EXIGIR_TROCA_PRIMEIRO_ACESSO=true`
-- `ADMIN_EXIGIR_TROCA_PRIMEIRO_ACESSO=false`
-
-## Variaveis importantes
-
-- `JWT_SECRET`
-- `JWT_EXPIRACAO_MS`
-- `JWT_REFRESH_EXPIRACAO_MS`
-- `ADMIN_EMAIL`
-- `ADMIN_PASSWORD`
-- `AUTH_LOGIN_MAX_TENTATIVAS`
-- `AUTH_LOGIN_JANELA_MINUTOS`
-- `AUTH_LOGIN_BLOQUEIO_MINUTOS`
-- `UPLOAD_DIR`
-- `POSTGRES_*`
-
-## Qualidade
-
-- Migrations versionadas em `src/main/resources/db/migration`
-- Hibernate com `ddl-auto=validate`
-- CI em `.github/workflows/ci.yml`
-
-## Roadmap
-
-- Expandir testes de integracao
-- Adicionar observabilidade no backend
-- Publicar deploy gratuito completo
-
-## Autor
-
-Desenvolvido por [Vinicius Guedes](https://github.com/Vini-Guedesz).
+- [ ] Expand integration tests for auth and CRUD modules
+- [ ] Add observability dashboards for backend metrics
+- [ ] Provide one-click cloud deployment guide
+- [ ] Add e2e tests for critical admin flows
