@@ -1,23 +1,23 @@
 # Portifolio Pessoal (Spring Boot + React)
 
-Portifolio Pessoal is a fullstack application with a public showcase and a protected admin panel to manage profile, experience, certifications, achievements and projects.
+Portifolio Pessoal e uma aplicacao fullstack com vitrine publica e painel administrativo protegido para gerenciar perfil, experiencias, certificacoes, conquistas e projetos.
 
-## ✨ Features
+## Funcionalidades
 
-- 🌍 Public area:
+- Area publica:
   - `/:usuario/sobre`
   - `/:usuario/portfolio`
-- 🔐 Admin area:
-  - Secure login with JWT (access + refresh token)
-  - First-access policy configurable by environment variable
-  - CRUD modules for profile and portfolio data
-- 🛡️ Security and reliability:
-  - Login rate limit
-  - Flyway migrations
-  - DTO-based API contracts
-- 🖼️ Profile photo upload and modern dark UI
+- Area admin:
+  - login com JWT (access + refresh token)
+  - politica de primeiro acesso configuravel por variavel de ambiente
+  - modulos CRUD para conteudo do portifolio
+- Seguranca e confiabilidade:
+  - rate limit no login
+  - migrations com Flyway
+  - contratos de API com DTOs
+- Upload de foto de perfil e interface moderna escura
 
-## 🛠️ Tech Stack
+## Stack
 
 ### Backend
 
@@ -41,29 +41,29 @@ Portifolio Pessoal is a fullstack application with a public showcase and a prote
 
 - Docker + Docker Compose
 
-## 📦 Installation
+## Instalacao
 
 ```bash
-# Clone repository
+# Clonar repositorio
 git clone https://github.com/Vini-Guedesz/portifolio.git
 
-# Enter project folder
+# Entrar no projeto
 cd portifolio
 
-# Create env file (Windows)
+# Criar arquivo de ambiente (Windows)
 copy .env.example .env
 
-# Run services
+# Subir servicos
 docker compose up --build
 ```
 
-Main URLs:
+URLs principais:
 
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:8080`
 - Swagger: `http://localhost:8080/swagger-ui.html`
 
-## 🧩 Project Structure
+## Estrutura do projeto
 
 ```text
 .
@@ -85,9 +85,9 @@ Main URLs:
 └── docker-compose.yml
 ```
 
-## 📌 Roadmap
+## Roadmap
 
-- [ ] Expand integration tests for auth and CRUD modules
-- [ ] Add observability dashboards for backend metrics
-- [ ] Provide one-click cloud deployment guide
-- [ ] Add e2e tests for critical admin flows
+- [ ] Expandir testes de integracao para autenticacao e modulos CRUD
+- [ ] Adicionar dashboards de observabilidade no backend
+- [ ] Publicar guia de deploy em nuvem com um clique
+- [ ] Adicionar testes e2e para fluxos criticos do admin
