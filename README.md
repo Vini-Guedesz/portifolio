@@ -84,10 +84,3 @@ URLs principais:
 │   └── components/
 └── docker-compose.yml
 ```
-
-## Roadmap
-
-- [ ] Expandir testes de integracao para autenticacao e modulos CRUD
-- [ ] Adicionar dashboards de observabilidade no backend
-- [ ] Publicar guia de deploy em nuvem com um clique
-- [ ] Adicionar testes e2e para fluxos criticos do admin
